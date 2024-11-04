@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Bubblegum Sans', cursive;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #F0EFE9; /* Light Cream Background */
+            color: #333;
+            padding: 20px;
+        }
+
+        /* Header and Navigation Styles */
+        .header-nav {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #F0C4D1; /* Soft Pink */
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .header-nav h1 {
+            font-size: 2rem;
+            color: #6B5B95;
+            margin-right: auto;
+        }
+
+        .navbar {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar a {
+            color: #5D5C61;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .navbar a:hover {
+            background-color: #F0EFE9;
+            transform: scale(1.05);
+        }
+
+        .user-icon {
+            color: #6B5B95;
+            font-size: 1.8rem;
+            margin-left: 20px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .user-icon:hover {
+            color: #D95D74;
+        }
+
+        /* Main Layout */
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            gap: 20px;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        /* Left Column */
+        .left-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex: 1;
+        }
+
+        /* Balance Section */
+        .balance-section {
+            background: #DBC0E8; /* Light Lavender */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+
+        .balance-section h2 {
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        /* Button Styles */
+        .balance-section button,
+        .input-section button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background-color: #e47068;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .balance-section button:hover,
+        .input-section button:hover {
+            background-color: #923c36;
+            transform: scale(1.05);
+        }
+
+        /* Potential Budget Section */
+        .potential-budget-section {
+            background: #F0EFE9; /* Light Cream */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .potential-budget-section h3 {
+            color: #6B5B95;
+        }
+
+        .potential-budget-section input {
+            width: calc(100% - 20px);
+            margin: 8px 0;
+            padding: 10px;
+            border: 1px solid #D3D3D3;
+            border-radius: 8px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Input Section */
+        .input-section {
+            background: #DBC0E8; /* Light Lavender */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-section input, .input-section select {
+            width: calc(100% - 20px);
+            margin: 8px 0;
+            padding: 10px;
+            border: 1px solid #D3D3D3;
+            border-radius: 8px;
+        }
+
+        /* Right Column - Expense List */
+        .right-column {
+            flex: 1;
+            background: #F0EFE9; /* Light Cream */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            max-height: 500px;
+        }
+
+        .right-column h3 {
+            color: #6B5B95;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        #expense-list {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #DBC0E8; /* Light Lavender */
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #expense-list th, #expense-list td {
+            padding: 15px; /* Increased padding for more spacing */
+            text-align: center;
+            border: 1px solid #D3D3D3;
+        }
+
+        #expense-list th {
+            background-color: #F0C4D1; /* Soft Pink */
+            color: white;
+        }
+
+        /* Total Row Styles */
+        .total-row {
+            font-weight: bold;
+            background-color: #F0EFE9; /* Light Cream */
+        }
+    </style>
+    <script>
+        let balance = 0;
+        let potentialBudget = 0;
+        let totalExpenses = 0;
+
+        function addItem() {
+            const category = document.getElementById("category").value;
+            const item = document.getElementById("item").value;
+            const amount = parseFloat(document.getElementById("amount").value);
+
+            if (!item || isNaN(amount) || !category) {
+                alert("Please fill out all fields!");
+                return;
+            }
+
+            balance -= amount;
+            totalExpenses += amount;
+
+            if (potentialBudget) {
+                potentialBudget -= amount;
+            }
+
+            document.getElementById("balance").textContent = $${balance.toFixed(2)};
+
+            const listItem = document.createElement("tr");
+            listItem.innerHTML = `
+                <td>${category}</td>
+                <td>${item}</td>
+                <td>$${amount.toFixed(2)}</td>
+            `;
+            document.getElementById("expense-list-body").appendChild(listItem);
+
+            updateTotal();
+
+            document.getElementById("item").value = "";
+            document.getElementById("amount").value = "";
+            document.getElementById("category").value = "";
+        }
+
+        function setPotentialBudget() {
+            potentialBudget = parseFloat(document.getElementById("potential-budget").value);
+            if (isNaN(potentialBudget) || potentialBudget <= 0) {
+                alert("Please enter a valid budget amount.");
+                return;
+            }
+            balance += potentialBudget;
+            document.getElementById("balance").textContent = $${balance.toFixed(2)};
+            document.getElementById("potential-budget").value = "";
+        }
+
+        function updateTotal() {
+            const totalDisplay = document.getElementById("total-expenses");
+            totalDisplay.textContent = $${totalExpenses.toFixed(2)};
+        }
+    </script>
+</head>
+<body>
+    <div class="header-nav">
+    <h1>🌸 Budget Buddy 🌸</h1>
+    <nav class="navbar">
+        <a href="">Home</a>
+        <a href="calendar.html">Calendar</a>
+        <a href="calculator.html">Calculator</a>
+        <a href="savings.html">Savings</a>
+    </nav>
+    <div class="user-icon-container">
+        <a href="user.html">
+            <i class="fas fa-user-circle user-icon"></i>
+        </a>
+    </div>
+</div>
+
+    <div class="container">
+        <div class="left-column">
+            <div class="balance-section">
+                <h2>Balance: <span id="balance">$0.00</span></h2>
+                <button onclick="setPotentialBudget()">Add Budget</button>
+            </div>
+            <div class="potential-budget-section">
+                <h3>Set Daily Budget</h3>
+                <input type="number" id="potential-budget" placeholder="Enter budget amount">
+                <button onclick="setPotentialBudget()">Set Budget</button>
+            </div>
+            <div class="input-section">
+                <h3>Add Expense</h3>
+				<select id="category">
+                    <option value="">Select Category</option>
+                    <option value="Food">Food</option>
+                    <option value="Transport">Transport</option>
+                    <option value="Entertainment">Entertainment</option>
+                </select>
+                <input type="text" id="item" placeholder="Item">
+                <input type="number" id="amount" placeholder="Amount">
+                <button onclick="addItem()">Add Expense</button>
+            </div>
+        </div>
+        <div class="right-column">
+            <h3>Expense List</h3>
+            <table id="expense-list">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Item</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody id="expense-list-body"></tbody>
+                <tfoot>
+                    <tr class="total-row">
+                        <td colspan="2">Total Expenses:</td>
+                        <td id="total-expenses">$0.00</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
