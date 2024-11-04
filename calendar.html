@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cute Professional Calendar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Bubblegum Sans', cursive;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #F5E1F4; /* Light Pastel Purple */
+            color: #333;
+            padding: 20px;
+        }
+
+        /* Header Styles */
+        .header-nav {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #F0C4D1; /* Soft Pink */
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .header-nav h1 {
+            font-size: 2.5rem;
+            color: #6B5B95;
+            margin-right: auto;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar a {
+            color: #5D5C61; /* Dark Gray */
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 10px 20px;
+            border-radius: 20px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .navbar a:hover {
+            background-color: #FC94AF; /* Hover Color */
+            transform: scale(1.05);
+        }
+
+        /* User Icon */
+        .user-icon {
+            color: #6B5B95;
+            font-size: 1.8rem;
+            margin-left: 20px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .user-icon:hover {
+            color: #D95D74;
+        }
+
+        /* Main Content */
+        .container {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        /* Calendar Section */
+        .calendar-section {
+            flex: 1;
+            background: #FFF4E5; /* Soft Cream */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .calendar-section iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 15px;
+        }
+
+        /* Notes Section */
+        .notes-section {
+            flex: 1;
+            background: #F0E3FF; /* Light Purple */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            max-height: 600px;
+        }
+
+        .notes-section h3 {
+            color: #6B5B95;
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+        }
+
+        .note-input {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .note-input input, .note-input textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #D3D3D3;
+            border-radius: 8px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            font-size: 1rem;
+        }
+
+        .note-input button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 20px;
+            background-color: #e47068; /* Soft Red */
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .note-input button:hover {
+            background-color: #923c36;
+            transform: scale(1.05);
+        }
+
+        .note-display {
+            margin-top: 20px;
+        }
+
+        .note-display p {
+            background: #FFF4E5;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+    </style>
+    <script>
+        let notes = {}; // Store notes with date as key
+
+        function addNote() {
+            const date = document.getElementById("note-date").value;
+            const content = document.getElementById("note-content").value;
+
+            if (!date || !content) {
+                alert("Please fill out both date and note content!");
+                return;
+            }
+
+            // Store note in notes object
+            notes[date] = content;
+
+            displayNotes(); // Update notes display
+
+            // Clear input fields
+            document.getElementById("note-date").value = "";
+            document.getElementById("note-content").value = "";
+        }
+
+        function displayNotes() {
+            const noteDisplay = document.getElementById("note-display");
+            noteDisplay.innerHTML = ""; // Clear previous notes
+
+            // Loop through notes and display them
+            for (const date in notes) {
+                const noteElement = document.createElement("p");
+                noteElement.textContent = ${date}: ${notes[date]};
+                noteDisplay.appendChild(noteElement);
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="header-nav">
+        <h1>🫧 Calendar 🫧</h1>
+        <nav class="navbar">
+            <a href="budgetung.html">Home</a>
+            <a href="calendar.html">Calendar</a>
+            <a href="calculator.html">Calculator</a>
+            <a href="savings.html">Savings</a>
+			
+        </nav>
+		<div class="user-icon-container">
+        <a href="user.html">
+            <i class="fas fa-user-circle user-icon"></i>
+        </a>
+		</div>
+    </div>
+        <i class="fas fa-user-circle user-icon"></i> <!-- User Icon added here -->
+    </div>
+    <div class="container">
+        <div class="calendar-section">
+            <!-- Embed Google Calendar with Philippine timezone -->
+            <iframe src="https://calendar.google.com/calendar/embed?src=en.philippine%23holiday%40group.v.calendar.google.com&ctz=Asia%2FManila"></iframe>
+        </div>
+        <div class="notes-section">
+            <h3>Notes for Dates</h3>
+            <div class="note-input">
+                <input type="date" id="note-date" />
+                <textarea id="note-content" rows="4" placeholder="Enter your note here..."></textarea>
+                <button onclick="addNote()">Add Note</button>
+            </div>
+            <div id="note-display" class="note-display">
+                <!-- Display notes here -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

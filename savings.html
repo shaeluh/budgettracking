@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savings Tracker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Bubblegum Sans', cursive;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #F0EFE9; /* Light Cream Background */
+            color: #333;
+            padding: 20px;
+        }
+
+        /* Header and Navigation Styles */
+        .header-nav {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #F0C4D1; /* Soft Pink */
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .header-nav h1 {
+            font-size: 2rem;
+            color: #6B5B95;
+            margin-right: auto;
+        }
+
+        .navbar {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar a {
+            color: #5D5C61;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .navbar a:hover {
+            background-color: #F0EFE9;
+            transform: scale(1.05);
+        }
+
+        .user-icon {
+            color: #6B5B95;
+            font-size: 1.8rem;
+            margin-left: 20px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .user-icon:hover {
+            color: #D95D74;
+        }
+
+        /* Calendar Container */
+        .calendar-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            max-width: 900px;
+            background: #FFF4E5;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        .calendar-container h2 {
+            color: #6B5B95;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+        }
+
+        .day {
+            background-color: #FCE4F7;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .day:hover {
+            background-color: #FC94AF;
+        }
+
+        /* Total Savings */
+        .total-savings {
+            margin-top: 20px;
+            font-size: 1.5rem;
+            color: #D95D74;
+            background: #FFE1F7;
+            padding: 15px;
+            border-radius: 10px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    <script>
+        // Initialize an object to store savings for each day in each category
+        const savings = {
+            "Emergency Fund": {},
+            "Vacation Fund": {},
+            "Gifts Fund": {}
+        };
+
+        // Function to add savings for a specific day and category
+        function addSavings(date, category) {
+            const amount = prompt(Saves for ${category} on ${date}:);
+            const parsedAmount = parseFloat(amount);
+
+            if (!isNaN(parsedAmount) && parsedAmount >= 0) {
+                savings[category][date] = (savings[category][date] || 0) + parsedAmount;
+                updateTotalSavings(category);
+                document.getElementById(savings-${category}-${date}).innerText = $${(savings[category][date] || 0).toFixed(2)};
+            } else {
+                alert("Please enter a valid amount.");
+            }
+        }
+
+        // Function to update the total savings display for a category
+        function updateTotalSavings(category) {
+            const total = Object.values(savings[category]).reduce((acc, val) => acc + val, 0);
+            document.getElementById(total-savings-${category}).innerText = Total Saved for ${category}: $${total.toFixed(2)};
+        }
+    </script>
+</head>
+<body>
+    <div class="header-nav">
+        <h1>💖 Savings Tracker 💖</h1>
+        <nav class="navbar">
+            <a href="budgetung.html">Home</a>
+            <a href="calendar.html">Calendar</a>
+            <a href="calculator.html">Calculator</a>
+            <a href="savings.html">Savings</a>
+        </nav>
+        <div class="user-icon-container">
+        <a href="user.html">
+            <i class="fas fa-user-circle user-icon"></i>
+        </a>
+		</div>
+    </div>
+
+    <!-- Emergency Fund Calendar -->
+    <div id="emergency-fund" class="calendar-container">
+        <h2>Emergency Fund Calendar</h2>
+        <div class="calendar">
+            <script>
+                const daysInMonth = 31;
+                for (let day = 1; day <= daysInMonth; day++) {
+                    document.write(<div class="day" onclick="addSavings('${day}/${new Date().getMonth() + 1}/${new Date().getFullYear()}', 'Emergency Fund')">${day}<div id="savings-Emergency Fund-${day}/${new Date().getMonth() + 1}/${new Date().getFullYear()}" style="font-size: 0.8rem;"></div></div>);
+                }
+            </script>
+        </div>
+        <div id="total-savings-Emergency Fund" class="total-savings">Total Saved for Emergency Fund: $0.00</div>
+    </div>
+
+    <!-- Vacation Fund Calendar -->
+    <div id="vacation-fund" class="calendar-container">
+        <h2>Vacation Fund Calendar</h2>
+        <div class="calendar">
+            <script>
+                for (let day = 1; day <= daysInMonth; day++) {
+                    document.write(<div class="day" onclick="addSavings('${day}/${new Date().getMonth() + 1}/${new Date().getFullYear()}', 'Vacation Fund')">${day}<div id="savings-Vacation Fund-${day}/${new Date().getMonth() + 1}/${new Date().getFullYear()}" style="font-size: 0.8rem;"></div></div>);
+                }
+            </script>
+        </div>
+        <div id="total-savings-Vacation Fund" class="total-savings">Total Saved for Vacation Fund: $0.00</div>
+    </div>
+
+    <!-- Gifts Fund Calendar -->
+    <div id="gifts-fund" class="calendar-container">
+        <h2>Gifts Fund Calendar</h2>
+        <div class="calendar">
+            <script>
+                for (let day = 1; day <= daysInMonth; day++) {
+                    document.write(<div class="day" onclick="addSavings('${day}/${new Date().getMonth() + 1}/${new Date().getFullYear()}', 'Gifts Fund')">${day}<div id="savings-Gifts Fund-${day}/${new Date().getMonth() + 1}/${new Date().getFullYear()}" style="font-size: 0.8rem;"></div></div>);
+                }
+            </script>
+        </div>
+        <div id="total-savings-Gifts Fund" class="total-savings">Total Saved for Gifts Fund: $0.00</div>
+    </div>
+</body>
+</html>

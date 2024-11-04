@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Bubblegum Sans', cursive;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #F0EFE9; /* Light Cream Background */
+            color: #333; /* Dark Text */
+            padding: 20px;
+        }
+
+        /* Header and Navigation Styles */
+        .header-nav {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #F0C4D1; /* Soft Pink */
+            padding: 15px 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+
+        .header-nav h1 {
+            font-size: 2rem;
+            color: #6B5B95; /* Main Title Color */
+            margin-right: auto;
+        }
+
+        .navbar {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar a {
+            color: #5D5C61; /* Darker Text for Links */
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .navbar a:hover {
+            background-color: #F0EFE9; /* Light Cream on Hover */
+            transform: scale(1.05);
+        }
+
+        .user-info {
+            background: #DBC0E8; /* Light Lavender */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+        }
+
+        .user-info .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 3px solid #6B5B95; /* Main Title Color */
+            margin-bottom: 15px;
+        }
+
+        .user-info h2 {
+            margin-bottom: 10px;
+            color: #6B5B95; /* Title Color */
+            font-size: 1.5rem;
+        }
+
+        .user-info p {
+            margin: 5px 0;
+            color: #5D5C61; /* Darker Gray for Subtext */
+        }
+
+        .status {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #43B581; /* Green for Online */
+            color: #FFFFFF; /* White Text for Status */
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <h1>🌸 Budget Buddy 🌸</h1>
+        <nav class="navbar">
+            <a href="budgetung.html">Home</a>
+            <a href="calendar.html">Calendar</a>
+            <a href="calculator.html">Calculator</a>
+            <a href="savings.html">Savings</a>
+        </nav>
+        <div class="user-icon-container">
+            <a href="user.html">
+                <i class="fas fa-user-circle user-icon"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="user-info">
+        <img src="https://via.placeholder.com/100" alt="User Avatar" class="avatar"> <!-- Replace with actual user avatar URL -->
+        <div class="status">Online</div>
+        <h2>Kap Nino Barzaga</h2>
+        <p><strong>Email:</strong> kalbo@panorth.com</p>
+        <p><strong>Joined:</strong> January 1, 2024</p>
+        <p><strong>I love Men</strong></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cute Calculator & Checklist</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Bubblegum Sans', cursive;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #F5E1F4;
+            color: #333;
+            padding: 20px;
+        }
+
+        /* Header and Navigation Styles */
+        .header-nav {
+            width: 100%;
+            max-width: 900px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #F0C4D1; /* Soft Pink */
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        .header-nav h1 {
+            font-size: 2rem;
+            color: #6B5B95;
+            margin-right: auto;
+        }
+
+        .navbar {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar a {
+            color: #5D5C61;
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .navbar a:hover {
+            background-color: #F0EFE9;
+            transform: scale(1.05);
+        }
+
+        .user-icon {
+            color: #6B5B95;
+            font-size: 1.8rem;
+            margin-left: 20px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .user-icon:hover {
+            color: #D95D74;
+        }
+
+        /* Container for Calculator and Checklist */
+        .main-container {
+            display: flex;
+            gap: 20px;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        /* Calculator Container */
+        .calculator-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 50%;
+            background: #FFF4E5;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .calculator-container h2 {
+            color: #6B5B95;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .calculator-display {
+            width: 100%;
+            background-color: #F0E3FF;
+            padding: 15px;
+            font-size: 1.5rem;
+            color: #333;
+            text-align: right;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .calculator-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .button {
+            padding: 20px;
+            font-size: 1.3rem;
+            background-color: #EAB8F2;
+            border: none;
+            border-radius: 10px;
+            color: #FFF;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .button:hover {
+            background-color: #D79DF5;
+            transform: scale(1.05);
+        }
+
+        .button-operator {
+            background-color: #FC94AF;
+        }
+
+        .button-equals {
+            background-color: #D95D74;
+            grid-column: span 2;
+        }
+
+        /* Checklist Container */
+        .checklist-container {
+            width: 50%;
+            background: #FFE1F7;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .checklist-container h2 {
+            color: #6B5B95;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .checklist {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #FCE4F7;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            color: #6B5B95;
+            font-size: 1rem;
+            border: 1px solid #EAB8F2;
+        }
+
+        .checklist button {
+            background-color: #FC94AF;
+            border: none;
+            border-radius: 8px;
+            color: #FFF;
+            cursor: pointer;
+            padding: 5px 10px;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .checklist button:hover {
+            background-color: #F06792;
+        }
+
+        .add-item-container {
+            display: flex;
+            margin-top: 10px;
+        }
+
+        .add-item-container input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 2px solid #EAB8F2;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-right: 10px;
+            color: #6B5B95;
+            background-color: #FFF4F4;
+        }
+
+        .add-item-container button {
+            padding: 10px;
+            background-color: #6B5B95;
+            color: #FFF;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-item-container button:hover {
+            background-color: #5A4A7B;
+        }
+    </style>
+    <script>
+        let displayValue = "";
+
+        function updateDisplay(value) {
+            displayValue += value;
+            document.getElementById("display").innerText = displayValue;
+        }
+
+        function clearDisplay() {
+            displayValue = "";
+            document.getElementById("display").innerText = "0";
+        }
+
+        function calculateResult() {
+            try {
+                displayValue = eval(displayValue).toString();
+                document.getElementById("display").innerText = displayValue;
+            } catch {
+                document.getElementById("display").innerText = "Error";
+                displayValue = "";
+            }
+        }
+
+        function addItem() {
+            const input = document.getElementById("new-item");
+            const itemText = input.value.trim();
+            if (itemText !== "") {
+                const checklist = document.getElementById("checklist");
+                const listItem = document.createElement("li");
+                listItem.innerHTML = `
+                    <span>${itemText}</span>
+                    <button onclick="removeItem(this)">Remove</button>
+                `;
+                checklist.appendChild(listItem);
+                input.value = "";
+            }
+        }
+
+        function removeItem(button) {
+            const listItem = button.parentElement;
+            listItem.remove();
+        }
+    </script>
+</head>
+<body>
+    <div class="header-nav">
+        <h1>💖Calculator & Checklist 💖</h1>
+        <nav class="navbar">
+            <a href="budgetung.html">Home</a>
+            <a href="calendar.html">Calendar</a>
+            <a href="calculator.html">Calculator</a>
+            <a href="savings.html">Savings</a>
+			
+        </nav>
+        <div class="user-icon-container">
+        <a href="user.html">
+            <i class="fas fa-user-circle user-icon"></i>
+        </a>
+		</div>
+    </div>
+    <div class="main-container">
+        <div class="calculator-container">
+            <h2>Calculator</h2>
+            <div id="display" class="calculator-display">0</div>
+            <div class="calculator-buttons">
+                <button class="button" onclick="updateDisplay('7')">7</button>
+                <button class="button" onclick="updateDisplay('8')">8</button>
+                <button class="button" onclick="updateDisplay('9')">9</button>
+                <button class="button button-operator" onclick="updateDisplay('/')">/</button>
+                <button class="button" onclick="updateDisplay('4')">4</button>
+                <button class="button" onclick="updateDisplay('5')">5</button>
+                <button class="button" onclick="updateDisplay('6')">6</button>
+                <button class="button button-operator" onclick="updateDisplay('*')">*</button>
+                <button class="button" onclick="updateDisplay('1')">1</button>
+                <button class="button" onclick="updateDisplay('2')">2</button>
+                <button class="button" onclick="updateDisplay('3')">3</button>
+                <button class="button button-operator" onclick="updateDisplay('-')">-</button>
+                <button class="button" onclick="updateDisplay('0')">0</button>
+                <button class="button" onclick="clearDisplay()">C</button>
+                <button class="button button-equals" onclick="calculateResult()">=</button>
+                <button class="button button-operator" onclick="updateDisplay('+')">+</button>
+            </div>
+        </div>
+        <div class="checklist-container">
+            <h2>Checklist</h2>
+            <ul id="checklist" class="checklist"></ul>
+            <div class="add-item-container">
+                <input type="text" id="new-item" placeholder="Add new item..." />
+                <button onclick="addItem()">Add</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
